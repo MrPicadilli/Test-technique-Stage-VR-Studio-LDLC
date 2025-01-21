@@ -1,11 +1,23 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// This class handles position of the camera
+/// </summary>
+/// <remarks>
+/// Attach this script to the camera parent which should be an empty object attached to nothing
+/// </remarks>
+
+[RequireComponent(typeof(MeshRenderer))]
 public class Interactible : MonoBehaviour
 {
+    [Header("Interactible aspect")]   
     private MeshRenderer _meshRenderer;
+    [Tooltip("Basic materal used on the interactible")]
     public Material originMaterial;
+    [Tooltip("Temporary materal used when the interactible is catchable")]
     public Material cameraHoverMateral;
+    [Tooltip("Temporary materal used when the interactible carried is throwable")]
     public Material throwableMaterial;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,8 +37,10 @@ public class Interactible : MonoBehaviour
     {
         _meshRenderer.material = cameraHoverMateral;
     }
+    /// <summary>
+    /// Will change the color of the object if the interactible carried is in the point zone
+    /// </summary>
     private void OnTriggerEnter(Collider other) {
-        Debug.Log(other.gameObject.name + " interactible");
         if(PlayerControllerNoGravity.instance.IsItemCarried(gameObject) && other.gameObject.layer == LayerMask.NameToLayer("Container")){
             ReplaceMaterialWithThrowable();
             PlayerControllerNoGravity.instance.ItemCanBeThrown();

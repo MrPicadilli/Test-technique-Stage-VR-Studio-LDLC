@@ -2,15 +2,25 @@ using System;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// This class manage all the UI
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
+
+    [Header("In Game UI")]
+    public GameObject gamePanel;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI timeText;
+
+    [Header("Win UI")]
     public GameObject winPanel;
+    [Header("Lose UI")]
     public GameObject losePanel;
+    [Tooltip("The text field specifying how many interactible the player managed to place in the container")]
     public TextMeshProUGUI resultsText;
-    public GameObject gamePanel;
+
 
     private void Awake()
     {
@@ -32,9 +42,6 @@ public class UIManager : MonoBehaviour
         gamePanel.SetActive(false);
         resultsText.text = "You managed to throw " + point + " out of " + pointToWin + " trash in the garbage can.";
     }
-
-
-
 
     public void ShowWinPanel()
     {

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// This class handles the zone when the interactible is throwable
+/// </summary>
+
 public class PointZone : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)

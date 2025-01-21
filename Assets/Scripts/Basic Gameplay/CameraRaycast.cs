@@ -1,9 +1,16 @@
 using UnityEngine;
 
+
+/// <summary>
+/// This class handles the feedback when the field of view is hover an interactible and the possibility to grab the item
+/// </summary>
 public class CameraRaycast : MonoBehaviour
 {
+    [Tooltip("Manage the total tieme allowed and the number of point to get to win the game")]
     public Camera playerCamera; // Reference to the Camera
-    public float rayDistance = 10f; // Maximum distance of the ray
+    [Tooltip("Manage the total tieme allowed and the number of point to get to win the game")]
+    public float rayDistance = 2f; // Maximum distance of the ray
+    [HideInInspector]
     public GameObject lastHoverInteractible;
     void Update()
     {
@@ -21,11 +28,12 @@ public class CameraRaycast : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            Debug.Log("Hit object: " + hit.collider.gameObject.name);
 
             if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Interactible"))
             {
-                if(lastHoverInteractible!=null && lastHoverInteractible != hit.collider.gameObject){
+                // in case if the ray was last seen on a different interactible and go through another different object whitout putting the origin material of the lastHoverInteractible
+                // or in simple term when you pass your ray from interactible to another interactible
+                if(lastHoverInteractible!=null && lastHoverInteractible != hit.collider.gameObject){ 
                     lastHoverInteractible.GetComponent<Interactible>().ReplaceMaterialWithOrigin();
                 }
                 hit.collider.gameObject.GetComponent<Interactible>().ReplaceMaterialWithHover();
@@ -33,6 +41,7 @@ public class CameraRaycast : MonoBehaviour
                 return;
             }
         }
+        // when you pass your ray from interactible to nothing
         if (lastHoverInteractible != null)
         {
             lastHoverInteractible.GetComponent<Interactible>().ReplaceMaterialWithOrigin();

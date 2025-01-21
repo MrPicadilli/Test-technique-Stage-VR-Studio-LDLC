@@ -14,7 +14,7 @@ public class GameSettingsEditor : Editor
 
         CreateTimeAllowedSlider(gameSettings);
 
-        MakeBar(gameSettings);
+        CreateDifficultyBar(gameSettings);
 
         if (GUI.changed)
         {
@@ -23,7 +23,6 @@ public class GameSettingsEditor : Editor
     }
     public void CreateTimeAllowedSlider(GameSettings gameSettings)
     {
-        // Slider for the allowed time
         gameSettings.timeAllowed = EditorGUILayout.Slider(
             new GUIContent("Time Allowed (seconds)", "Time allowed to complete the game in seconds."),
             gameSettings.timeAllowed,
@@ -33,7 +32,6 @@ public class GameSettingsEditor : Editor
     }
     public void CreatePointToWinSlider(GameSettings gameSettings)
     {
-        // Slider for the total number of point to win
         gameSettings.totalPointToWin = EditorGUILayout.IntSlider(
             new GUIContent("Points to Win", "Number of points needed to complete the game."),
             gameSettings.totalPointToWin,
@@ -41,13 +39,15 @@ public class GameSettingsEditor : Editor
             4
         );
     }
-    public void MakeBar(GameSettings gameSettings)
+    /// <summary>
+    /// Make a bar showing the estimated difficulty depending of the time allowed, the number of points needed to win and the estimated time to win 1 point
+    /// </summary>
+    public void CreateDifficultyBar(GameSettings gameSettings)
     {
         // calcul of the margin of error which is the number of second administred in addition to the number of second needed to do the objective.
-        float timeEstimation = gameSettings.totalPointToWin * 5f; // 5 correspond to the time used to do one back and forth
-        float marginOfError = gameSettings.timeAllowed - timeEstimation;
+        float timeEstimationNeeded = gameSettings.totalPointToWin * 5f; // 5 correspond to the time used to do one back and forth
+        float marginOfError = gameSettings.timeAllowed - timeEstimationNeeded;
 
-        // Progress Bar managing the difficulty
         GUILayout.Space(10);
         EditorGUILayout.LabelField("Difficulty Estimed", EditorStyles.boldLabel);
         Color originalColor = GUI.color;
@@ -55,7 +55,7 @@ public class GameSettingsEditor : Editor
         string barText;
         Color barColor;
 
-        // change the color of the progressbar depending of the margin of error
+        // change the color and text of the bar depending of the margin of error
         if (marginOfError > 10f)
         {
             barColor = Color.green;

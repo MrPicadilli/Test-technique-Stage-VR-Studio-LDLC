@@ -1,14 +1,24 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/// <summary>
+/// This class manage all the rule of the game ( nbr of point, time)
+/// </summary>
+/// <remarks>
+/// i put a CursorLockMode.Locked at the start so that when the player click the screen game it will make the cursor disappear
+/// </remarks>
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    [HideInInspector]
     public bool isPlaying = true;
-    public float time;
-    public int point;
+
+    [Header("Settings")]
+    [Tooltip("Manage the total tieme allowed and the number of point to get to win the game")]
     public GameSettings gameSettings;
+    private float _time;
+    private int _point;
     private void Awake()
     {
         if (instance == null)
@@ -16,10 +26,11 @@ public class GameManager : MonoBehaviour
         else
             Destroy(this);
     }
-    private void Start() {
+    private void Start()
+    {
         Cursor.lockState = CursorLockMode.Locked;
-        time = gameSettings.timeAllowed;
-        UIManager.instance.UpdateScoreBoard(point, gameSettings.totalPointToWin);
+        _time = gameSettings.timeAllowed;
+        UIManager.instance.UpdateScoreBoard(_point, gameSettings.totalPointToWin);
     }
     public void FreezeGame()
     {
@@ -30,22 +41,25 @@ public class GameManager : MonoBehaviour
     {
         UpdateTime();
     }
-    public void UpdateTime(){
-        time -= Time.deltaTime;
-        
-        UIManager.instance.UpdateTimeUI(time);
-        
-        if(time<=0)
+    public void UpdateTime()
+    {
+        _time -= Time.deltaTime;
+
+        UIManager.instance.UpdateTimeUI(_time);
+
+        if (_time <= 0)
             GameOver();
 
     }
 
     private void GameOver()
     {
-        UIManager.instance.ShowLosePanel(point,gameSettings.totalPointToWin);
+        UIManager.instance.ShowLosePanel(_point, gameSettings.totalPointToWin);
         StopGame();
     }
-
+    /// <summary>
+    /// will meake the player lose control of the character and will make his mouse cursor appear to permit him to click on try again
+    /// </summary>
     private void StopGame()
     {
         isPlaying = false;
@@ -54,11 +68,11 @@ public class GameManager : MonoBehaviour
 
     internal void AddPoint()
     {
-        point++;
-        if (point >= gameSettings.totalPointToWin)
+        _point++;
+        if (_point >= gameSettings.totalPointToWin)
             Win();
 
-        UIManager.instance.UpdateScoreBoard(point, gameSettings.totalPointToWin);
+        UIManager.instance.UpdateScoreBoard(_point, gameSettings.totalPointToWin);
     }
 
     private void Win()
@@ -66,7 +80,8 @@ public class GameManager : MonoBehaviour
         UIManager.instance.ShowWinPanel();
         StopGame();
     }
-    public void RestartLevel(){
+    public void RestartLevel()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

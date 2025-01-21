@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Input")]
     private Rigidbody _rb;
+    private float _x, _y;
 
     [Header("Rotation and look")]
     private float xRotation;
@@ -20,10 +21,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Force of the correction of movements so that the player don't slide too much")]
     public float counterMovementForce = 0.175f;
     private float _threshold = 0.01f;
-    public ForceMode forceMode = ForceMode.Force;
-
-    [Header("Input")]
-    private float _x, _y;
+    public ForceMode forceMode = ForceMode.Force;    
 
     [Header("Grab System")]
     private CameraRaycast _cameraRaycast;
