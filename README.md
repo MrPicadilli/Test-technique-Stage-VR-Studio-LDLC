@@ -42,7 +42,7 @@ Dans l'ordre de développement j'ai procédé comme comme ci :
 * lundi : 3h
 * mardi : 6h
 
-total = 1+3+0+4+3+4 = 17 h
+total = 1+3+0+4+3+6 = 17 h
 ## choix importants
 * Problèmes : Dois je appliquer de la gravité sur le joueur ?
     *  dans la version basic oui pourquoi pas mais au début du développement je devais juste faire le stricte minimum donc j'ai repoussé ce choix
