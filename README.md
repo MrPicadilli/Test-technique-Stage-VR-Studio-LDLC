@@ -2,6 +2,13 @@
 Le test technique que demande LDLC VR studio pour tous les candidats au stage pour le poste de "Développeur.euse Unity Jeu Vidéo en VR"
 
 Date limite d'envoi : **mardi 21 janvier 23h59** (un retour anticipé est bien sûr possible).
+
+Commandes :
+* zqsd = se déplacer
+* clic gauche = attraper un objet
+* clic droit = relacher un objet
+
+
 # Information supplémentaire 
 ## Etapes de développement
 A chaque fois je procédais de la meme facon :
@@ -30,12 +37,12 @@ Dans l'ordre de développement j'ai procédé comme comme ci :
 ## Temps passé
 * jeudi : 1h
 * vendredi : 3h
-* samedi : 2h
+* samedi : 0h
 * dimanche : 4h
 * lundi : 3h
-* mardi : 5h
+* mardi : 4h
 
-total = 3 * 3 + 2 + 4 + 1 = 16 h
+total = 1+3+0+4+3+4 = 15 h
 ## choix importants
 * Problèmes : Dois je appliquer de la gravité sur le joueur ?
     *  dans la version basic oui pourquoi pas mais au début du développement je devais juste faire le stricte minimum donc j'ai repoussé ce choix
@@ -133,6 +140,9 @@ Idées :
         - easy = le conteneur ne bouge pas
         - medium le conteneur se téléporte a chaque lancé réussi
         - hard le conteneur bouge avec un certain pattern 
+
+
+Rien n'a été fait parmi cette liste d'idées mais si jamais je me retrouve a retravailler sur ce projet je pense avancer le gameplay en priorité puis essayer de faire une version unity.
 
 # Feuille de route
 * Jeudi : mise en place du git et je commence a planifier / réfléchir à l'implémentation

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea5c7006a13d2484ea7bebebe92a047e, type: 3}
-  m_Name: GameSettings
+  m_Name: Basic Gameplay Settings
   m_EditorClassIdentifier: 
-  timeAllowed: 7.3
+  timeAllowed: 20
   totalPointToWin: 2
